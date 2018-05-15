@@ -30,4 +30,4 @@ println """\
 
          reads_atropos_pe = Channel
              .fromFilePairs(params.reads + '*_{R1,R2}.fastq.gz', size: 2, flat: true)
-             .println()
+             .println(reads_atropos_pe)
