@@ -29,6 +29,5 @@ println """\
          .stripIndent()
 
          reads_atropos_pe = Channel
-             .fromFilePairs(params.input + '*_{1,2,3}.fastq.gz', size: 2, flat: true)
+             .fromFilePairs(params.reads + '*_{R1,R2}.fastq.gz', size: 2, flat: true)
              .println()
-             
