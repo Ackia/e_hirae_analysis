@@ -23,7 +23,12 @@ println """\
          R N A S E Q - N F   P I P E L I N E
          ===================================
          reads        : ${params.reads}
-         multiqc      : ${params.multiqc} 
+         multiqc      : ${params.multiqc}
          outdir       : ${params.outdir}
          """
          .stripIndent()
+
+         reads_atropos_pe = Channel
+             .fromFilePairs(params.input + '*_{1,2,3}.fastq.gz', size: 2, flat: true)
+             .println()
+             
