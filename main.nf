@@ -35,7 +35,6 @@ process trimming_pe {
 
                  input:
                      set val(id), file(read1), file(read2) from reads_atropos_pe
-                     file adapters
 
                  output:
                      set val(id), file("${id}_R1.fastq.gz"), file("${id}_R2.fastq.gz") into trimmed_reads_pe
