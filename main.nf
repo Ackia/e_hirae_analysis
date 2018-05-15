@@ -22,8 +22,8 @@ if (params.outdir == '') {
 println """\
          R N A S E Q - N F   P I P E L I N E
          ===================================
-         transcriptome: ${params.transcriptome}
          reads        : ${params.reads}
+         multiqc      : ${params.multiqc} 
          outdir       : ${params.outdir}
          """
          .stripIndent()
