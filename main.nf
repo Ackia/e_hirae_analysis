@@ -58,7 +58,7 @@ process fastqc {
 
                  script:
                      """
-                     fastqc $reads
+                     fastqc -t 10 $reads
                      """
              }
 
