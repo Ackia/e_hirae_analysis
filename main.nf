@@ -70,7 +70,7 @@ process multiqc {
                      """
              }
              reads_assembly_pe = Channel
-                          .fromFilePairs(params.reads + '*_{R1,R2}.fastq.gz', size: 2, flat: true)
+                          .fromFilePairs('${params.outdir}/trimmed/' + '*_{R1,R2}.fastq', size: 2, flat: true)
 process assembly {
                   publishDir path: "${params.outdir}/assembly", mode: 'copy'
 
