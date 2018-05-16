@@ -9,11 +9,6 @@ if (params.reads == '') {
     exit 1, '--reads is a required paramater for qc pipeline'
 }
 
-// requires --multiqc for qc
-if (params.multiqc == '') {
-    exit 1, '--multiqc is a required paramater for qc pipeline'
-}
-
 // requires --outdir for qc
 if (params.outdir == '') {
     exit 1, '--outdir is a required paramater for qc pipeline'
@@ -74,14 +69,14 @@ process multiqc {
                      multiqc .
                      """
              }
-trimmed_reads_pe = Channel
+trimmed_reads_assembly = Channel
     .fromFilePairs("${params.outdir}/trimming" + '*_{R1,R2}.fastq.gz')
 
 process assembly {
                   publishDir path: "${params.outdir}/assembly", mode: 'copy'
 
                   input:
-                      set val(id), file(read1), file(read2) from trimmed_reads_pe
+                      set val(id), file(read1), file(read2) from trimmed_reads_assembly
                   output:
                       set val(id), file("${id}_.fasta") into assembly_result
                   script:
