@@ -24,7 +24,7 @@ reads_atropos_pe = Channel
              .fromFilePairs(params.reads + '*_{R1,R2}.fastq.gz', size: 2, flat: true)
 
 process trimming_pe {
-                 publishDir path: "${params.outdir}/trimming", mode: 'copy'
+                 publishDir path: "${params.outdir}/trimmed", mode: 'copy'
 
                  input:
                      set val(id), file(read1), file(read2) from reads_atropos_pe
@@ -69,8 +69,8 @@ process multiqc {
                      multiqc .
                      """
              }
-             reads_assembly_pe = Channel
-                          .fromFilePairs('${params.outdir}/trimmed/' + '*_{R1,R2}.fastq', size: 2, flat: true)
+reads_assembly_pe = Channel
+              .fromFilePairs('${params.outdir}/trimmed/' + '*_{R1,R2}.fastq', size: 2, flat: true)
 process assembly {
                   publishDir path: "${params.outdir}/assembly", mode: 'copy'
 
