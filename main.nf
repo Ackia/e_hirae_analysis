@@ -77,7 +77,7 @@ process multiqc {
                      multiqc .
                      """
              }
-Channel = trimmed_reads_pe
+trimmed_reads_pe = Channel
     .fromFilePairs(params.outdir + '*_{R1,R2}.fastq.gz')
 
 process assembly {
