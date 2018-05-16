@@ -81,7 +81,7 @@ process assembly {
 
                   script:
                       """
-                      unicycler -1 $read1 -2 $read2 -o .
+                      unicycler -1 $read1 -2 $read2 -o ${params.outdir}/assembly
                       mv assembly/assembly.fasta ${id}_assembly.fasta
                       """
 }
