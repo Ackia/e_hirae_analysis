@@ -22,7 +22,6 @@ println """\
          R N A S E Q - N F   P I P E L I N E
          ===================================
          reads        : ${params.reads}
-         multiqc      : ${params.multiqc}
          outdir       : ${params.outdir}
          """
          .stripIndent()
