@@ -31,7 +31,7 @@ reads_atropos_pe = Channel
              .fromFilePairs(params.reads + '*_{R1,R2}.fastq.gz', size: 2, flat: true)
 
 process trimming_pe {
-                 publishDir params.outdir, mode: 'copy'
+                 publishDir 'results', mode: 'copy'
 
                  input:
                      set val(id), file(read1), file(read2) from reads_atropos_pe
@@ -48,6 +48,8 @@ process trimming_pe {
                      """
              }
 process fastqc {
+                 publishDir 'results', mode: 'copy'
+
                  input:
                      file reads from trimmed_reads_pe.collect()
 
@@ -78,7 +80,6 @@ trimmed_reads_pe = Channel
     .fromFilePairs(params.outdir + '*_{R1,R2}.fastq.gz')
 
 process assembly {
-                  container 'ewels/multiqc'
                   publishDir 'results', mode: 'copy'
 
                   input:
