@@ -47,3 +47,45 @@ process trimming_pe {
                          -o ${id}_R1.fastq.gz -p ${id}_R2.fastq.gz
                      """
              }
+process fastqc {
+                 container 'hadrieng/fastqc'
+
+                 input:
+                     file reads from trimmed_reads_pe.concat.collect()
+
+                 output:
+                     file "*_fastqc.{zip,html}" into fastqc_results
+
+                 script:
+                     """
+                     fastqc -t 4 $reads
+                     """
+             }
+
+process multiqc {
+                 container 'ewels/multiqc'
+                 publishDir 'results', mode: 'copy'
+
+                 input:
+                     file 'fastqc/*' from fastqc_results.collect()
+
+                 output:
+                     file 'multiqc_report.html'
+
+                 script:
+                     """
+                     multiqc .
+                     """
+             }
+Channel = trimmed_reads_pe
+    .fromFilePairs(params.outdir + '*_{R1,R2}.fastq.gz')
+
+process assembly {
+                  container 'ewels/multiqc'
+                  publishDir 'results', mode: 'copy'
+
+                  input:
+                      set val(id), file(read1), file(read2) from trimmed_reads_pe
+                  output:
+                      set val(id), file("${id}_R1.fastq.gz") into trimmed_reads_pe
+}
