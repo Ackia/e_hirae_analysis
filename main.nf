@@ -69,14 +69,12 @@ process multiqc {
                      multiqc .
                      """
              }
-trimmed_reads_assembly = Channel
-    .fromFilePairs("${params.outdir}/trimming" + '*_{R1,R2}.fastq.gz')
 
 process assembly {
                   publishDir path: "${params.outdir}/assembly", mode: 'copy'
 
                   input:
-                      set val(id), file(read1), file(read2) from trimmed_reads_assembly
+                      set val(id), file(read1), file(read2) from trimmed_reads_pe.collect()
                   output:
                       set val(id), file("${id}_.fasta") into assembly_result
                   script:
