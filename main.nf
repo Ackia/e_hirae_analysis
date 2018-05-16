@@ -40,11 +40,12 @@ process trimming_pe {
                          -o ${id}_R1.fastq -p ${id}_R2.fastq
                      """
              }
+trimmed_reads_pe.into {reads_for_fastq; reads_for_assembly}
 process fastqc {
                  publishDir path: "${params.outdir}/fastqc", mode: 'copy'
 
                  input:
-                     file reads from trimmed_reads_pe.collect()
+                     file reads from reads_for_fastq.collect()
 
                  output:
                      file "*_fastqc.{zip,html}" into fastqc_results
@@ -69,13 +70,11 @@ process multiqc {
                      multiqc .
                      """
              }
-reads_assembly_pe = Channel
-              .fromFilePairs('${params.outdir}/trimmed/' + '*_{R1,R2}.fastq', size: 2, flat: true)
 process assembly {
                   publishDir path: "${params.outdir}/assembly", mode: 'copy'
 
                   input:
-                      set val(id), file(read1), file(read2) from reads_assembly_pe
+                      set val(id), file(read1), file(read2) from reads_for_assembly.collect()
 
                   output:
                       set val(id), file("${id}_.fasta") into assembly_result
