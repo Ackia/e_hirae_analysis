@@ -86,6 +86,7 @@ process assembly {
                       set val(id), file("${id}_.fasta") into assembly_result
                   script:
                       """
-                      echo $read1 $read2
+                      unicycler -1 $read1 -2 $read2 -o .
+                      mv assembly/assembly.fasta ${id}_assembly.fasta
                       """
 }
