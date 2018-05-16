@@ -14,7 +14,7 @@ if (params.outdir == '') {
     exit 1, '--outdir is a required paramater for qc pipeline'
 }
 println """\
-         R N A S E Q - N F   P I P E L I N E
+         Hybrid Assembly- N F   P I P E L I N E
          ===================================
          reads        : ${params.reads}
          outdir       : ${params.outdir}
