@@ -88,4 +88,8 @@ process assembly {
                       set val(id), file(read1), file(read2) from trimmed_reads_pe
                   output:
                       set val(id), file("${id}_R1.fastq.gz") into trimmed_reads_pe
+                  script:
+                      """
+                      echo $read1 $read2
+                      """
 }
