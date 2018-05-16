@@ -1,9 +1,8 @@
 /*
  * pipeline input parameters
  */
-params.reads = "$baseDir/data"
-params.multiqc = "$baseDir/Multi_QC"
-params.outdir = "$baseDir/results_qc"
+params.reads = ""
+params.outdir = ""
 
 // requires --reads for qc
 if (params.reads == '') {
