@@ -51,7 +51,7 @@ process fastqc {
                  container 'hadrieng/fastqc'
 
                  input:
-                     file reads from trimmed_reads_pe.concat.collect()
+                     file reads from trimmed_reads_pe.collect()
 
                  output:
                      file "*_fastqc.{zip,html}" into fastqc_results
