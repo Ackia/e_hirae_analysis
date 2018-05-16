@@ -48,8 +48,6 @@ process trimming_pe {
                      """
              }
 process fastqc {
-                 container 'hadrieng/fastqc'
-
                  input:
                      file reads from trimmed_reads_pe.collect()
 
@@ -63,7 +61,6 @@ process fastqc {
              }
 
 process multiqc {
-                 container 'ewels/multiqc'
                  publishDir 'results', mode: 'copy'
 
                  input:
