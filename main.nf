@@ -43,7 +43,7 @@ process trimming_pe {
                      """
                      mkdir trimmed
                      atropos -a TGGAATTCTCGGGTGCCAAGG -B AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT \
-                         -T 4 -m 50 --max-n 0 -q 20,20 -pe1 $read1 -pe2 $read2 \
+                         -T 10 -m 50 --max-n 0 -q 20,20 -pe1 $read1 -pe2 $read2 \
                          -o ${id}_R1.fastq -p ${id}_R2.fastq
                      """
              }
