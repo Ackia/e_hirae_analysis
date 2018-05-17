@@ -78,11 +78,10 @@ process assembly {
                       set val(id), file(read1), file(read2) from reads_for_assembly.collect()
 
                   output:
-                      set val(id), file'assembly.fasta' into assembly_result
+                      file'assembly.fasta' into assembly_result
 
                   script:
                       """
                       unicycler -1 $read1 -2 $read2 -o ${params.outdir}/assembly -t 10
-                      mv ${params.outdir}/assembly/assembly.fasta ${id}_assembly.fasta
                       """
 }
